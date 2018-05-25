@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class HumanController : MonoBehaviour {
 
+    public Rigidbody prefabInfection;
+    public Transform infectLocation;
+
+
     void OnCollisionEnter(Collision colInfo)
     {
         if (colInfo.collider.tag == "Infection")
         {
-            gameObject.tag = "Infection";
-            Debug.Log("Hit by" + colInfo.gameObject.name);
+            Destroy(gameObject);
+            Instantiate(prefabInfection, transform.position, transform.rotation);
         }
     }
 
@@ -20,7 +24,7 @@ public class HumanController : MonoBehaviour {
 
     void Start()
     {
-        // Debug.Log("start test");
+        Debug.Log(transform.position);
     }
 
 }
