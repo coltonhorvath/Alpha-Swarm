@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class HumanController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void OnCollisionEnter(Collision colInfo)
+    {
+        if (colInfo.collider.tag == "Infection")
+        {
+            gameObject.tag = "Infection";
+            Debug.Log("Hit by" + colInfo.gameObject.name);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log(gameObject.name + " was triggered by " + other.gameObject.name);
+    }
+
+    void Start()
+    {
+        // Debug.Log("start test");
+    }
+
 }

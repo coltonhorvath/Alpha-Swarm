@@ -7,7 +7,6 @@ public class InfectionController : MonoBehaviour {
 
     public float searchRadius = 20f;
     NavMeshAgent infectionAgent;
-    public Transform humanTarget;
     private Vector3 FindClosestHuman()
     {
         GameObject[] Humans = GameObject.FindGameObjectsWithTag("Human");
@@ -30,23 +29,28 @@ public class InfectionController : MonoBehaviour {
         return bestTarget.position;
     }
 
-    void OnDrawGizmosSelected()
+    /*void OnCollisionEnter(Collision colInfo)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, searchRadius);
-    }
+        if (colInfo.collider.tag == "Human")
+        {
+            Debug.Log("Hit Human.");
+        }
+    }*/
 
-	// Use this for initialization
-	void Start ()
+    void Start ()
     {
         infectionAgent = this.GetComponent<NavMeshAgent>();
         infectionAgent.autoBraking = false;
 	}
 
-
-	// Update is called once per frame
 	void Update ()
     {
-        infectionAgent.SetDestination(FindClosestHuman());
+            infectionAgent.SetDestination(FindClosestHuman());
 	}
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, searchRadius);
+    }
 }
