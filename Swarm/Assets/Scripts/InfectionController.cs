@@ -6,9 +6,29 @@ using UnityEngine.AI;
 public class InfectionController : MonoBehaviour {
 
     public float searchRadius = 20f;
-    [SerializeField]
-    Transform huntedTarget;
-    NavMeshAgent agent;
+    NavMeshAgent infectionAgent;
+    public Transform humanTarget;
+    private Vector3 FindClosestHuman()
+    {
+        GameObject[] Humans = GameObject.FindGameObjectsWithTag("Human");
+
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = this.transform.position;
+        foreach (GameObject human in Humans)
+        {
+            Vector3 directionToTarget = human.transform.position - currentPosition;
+
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = human.transform;
+            }
+        }
+
+        return bestTarget.position;
+    }
 
     void OnDrawGizmosSelected()
     {
@@ -19,31 +39,14 @@ public class InfectionController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        agent = this.GetComponent<NavMeshAgent>();
+        infectionAgent = this.GetComponent<NavMeshAgent>();
+        infectionAgent.autoBraking = false;
 	}
 
-    public Transform Target;
+
 	// Update is called once per frame
-	void Update () {
-
-        Hunt();
-        
-        /*if (Vector3.Distance(Target.position, this.transform.position) < 20)
-        {
-            Vector3 huntTarget = huntedTarget.transform.position;
-            agent.SetDestination(huntTarget);
-            //Vector3 direction = Target.position - this.transform.position;
-        }*/
-
-	}
-
-    private void Hunt()
+	void Update ()
     {
-        if (Vector3.Distance(Target.position, this.transform.position) < 20)
-        {
-            Vector3 huntTarget = GameObject.FindWithTag("Human").transform.position;
-            agent.SetDestination(huntTarget);
-            Vector3 direction = GameObject.FindWithTag("Human").transform.position - this.transform.position;
-        }
-    }
+        infectionAgent.SetDestination(FindClosestHuman());
+	}
 }
