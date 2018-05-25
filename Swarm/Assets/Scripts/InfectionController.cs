@@ -29,14 +29,6 @@ public class InfectionController : MonoBehaviour {
         return bestTarget.position;
     }
 
-    /*void OnCollisionEnter(Collision colInfo)
-    {
-        if (colInfo.collider.tag == "Human")
-        {
-            Debug.Log("Hit Human.");
-        }
-    }*/
-
     void Start ()
     {
         infectionAgent = this.GetComponent<NavMeshAgent>();
