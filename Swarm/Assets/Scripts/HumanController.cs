@@ -6,23 +6,26 @@ using UnityEngine.AI;
 public class HumanController : MonoBehaviour {
 
     NavMeshAgent humanAgent;
+    Vector3 runAway;
 
     private Vector3 FindClosestInfection()
     {
-        GameObject[] Humans = GameObject.FindGameObjectsWithTag("Infection");
+        GameObject[] Infections = GameObject.FindGameObjectsWithTag("Infection");
 
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = this.transform.position;
-        foreach (GameObject human in Humans)
+
+        foreach (GameObject Infection in Infections)
         {
-            Vector3 directionToTarget = human.transform.position - currentPosition;
+            Vector3 directionToTarget = Infection.transform.position - currentPosition;
 
             float dSqrToTarget = directionToTarget.sqrMagnitude;
+
             if (dSqrToTarget < closestDistanceSqr)
             {
                 closestDistanceSqr = dSqrToTarget;
-                bestTarget = human.transform;
+                bestTarget = Infection.transform;
             }
         }
 
@@ -47,7 +50,7 @@ public class HumanController : MonoBehaviour {
     void Update()
     {
         //work needs done in update to make Humans work.
-        humanAgent.transform.position = FindClosestInfection();
-        
+        humanAgent.Move(transform.position.normalized - prefabInfection.transform.position.normalized);
+
     }
 }

@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd2e4f75c29a9c43adb6048408409af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabInfection: {fileID: 54531351796709408, guid: b1ad4e0825bb445499cc61443b4a052b,
+    type: 2}
 --- !u!135 &135648967628854280
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -134,7 +136,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
