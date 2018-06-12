@@ -9,7 +9,7 @@ public class AvoidAgent : AgentBehaviour
 
     void Start()
     {
-        targets = GameObject.FindGameObjectsWithTag("Infection");
+        targets = GameObject.FindGameObjectsWithTag("Agent");
     }
 
     public override Steering GetSteering()
