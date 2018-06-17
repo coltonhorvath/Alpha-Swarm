@@ -7,6 +7,7 @@ TagManager:
   - Vaccine
   - Infection
   - Human
+  - Agent
   layers:
   - Default
   - TransparentFX

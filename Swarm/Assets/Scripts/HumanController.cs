@@ -5,10 +5,11 @@ using UnityEngine.AI;
 
 public class HumanController : MonoBehaviour {
 
-    NavMeshAgent humanAgent;
-    Vector3 runAway;
+    public NavMeshAgent humanAgent;
+    public GameObject Infection;
+    public float InfectionDistanceRun = 10.0f;
 
-    private Vector3 FindClosestInfection()
+    /*private Vector3 FindClosestInfection()
     {
         GameObject[] Infections = GameObject.FindGameObjectsWithTag("Infection");
 
@@ -30,7 +31,7 @@ public class HumanController : MonoBehaviour {
         }
 
         return bestTarget.position;
-    }
+    }*/
 
     public Rigidbody prefabInfection;
     void OnCollisionEnter(Collision colInfo)
@@ -44,13 +45,21 @@ public class HumanController : MonoBehaviour {
 
     void Start()
     {
-        humanAgent = this.GetComponent<NavMeshAgent>();
+        humanAgent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        //work needs done in update to make Humans work.
-        humanAgent.Move(transform.position.normalized - prefabInfection.transform.position.normalized);
+        float distance = Vector3.Distance(transform.position, Infection.transform.position);
+
+        Debug.Log("Distance: " + distance);
+
+        if (distance < InfectionDistanceRun)
+        {
+            Vector3 DirToPlayer = transform.position - Infection.transform.position;
+            Vector3 newPos = transform.position + DirToPlayer;
+            humanAgent.SetDestination(newPos);
+        }
 
     }
 }
