@@ -5,33 +5,26 @@ using UnityEngine.AI;
 
 public class HumanController : MonoBehaviour {
 
-    public NavMeshAgent humanAgent;
-    public GameObject Infection;
+    private NavMeshAgent humanAgent;
     public float InfectionDistanceRun = 10.0f;
 
-    /*private Vector3 FindClosestInfection()
+    private void RunAway()
     {
         GameObject[] Infections = GameObject.FindGameObjectsWithTag("Infection");
-
-        Transform bestTarget = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = this.transform.position;
-
-        foreach (GameObject Infection in Infections)
+        foreach (GameObject infection in Infections)
         {
-            Vector3 directionToTarget = Infection.transform.position - currentPosition;
+            float distance = Vector3.Distance(transform.position, infection.transform.position);
 
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            Debug.Log("Distance: " + distance);
 
-            if (dSqrToTarget < closestDistanceSqr)
+            if (distance < InfectionDistanceRun)
             {
-                closestDistanceSqr = dSqrToTarget;
-                bestTarget = Infection.transform;
+                Vector3 DirToPlayer = transform.position - infection.transform.position;
+                Vector3 newPos = transform.position + DirToPlayer;
+                humanAgent.SetDestination(newPos);
             }
         }
-
-        return bestTarget.position;
-    }*/
+    }
 
     public Rigidbody prefabInfection;
     void OnCollisionEnter(Collision colInfo)
@@ -48,9 +41,10 @@ public class HumanController : MonoBehaviour {
         humanAgent = GetComponent<NavMeshAgent>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        float distance = Vector3.Distance(transform.position, Infection.transform.position);
+        RunAway();
+        /*float distance = Vector3.Distance(transform.position, Infection.transform.position);
 
         Debug.Log("Distance: " + distance);
 
@@ -59,7 +53,7 @@ public class HumanController : MonoBehaviour {
             Vector3 DirToPlayer = transform.position - Infection.transform.position;
             Vector3 newPos = transform.position + DirToPlayer;
             humanAgent.SetDestination(newPos);
-        }
+        }*/
 
     }
 }

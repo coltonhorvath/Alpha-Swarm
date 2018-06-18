@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class InfectionController : MonoBehaviour {
 
-    public float searchRadius = 20f;
     NavMeshAgent infectionAgent;
     private Vector3 FindClosestHuman()
     {
@@ -39,10 +38,4 @@ public class InfectionController : MonoBehaviour {
     {
             infectionAgent.SetDestination(FindClosestHuman());
 	}
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, searchRadius);
-    }
 }
