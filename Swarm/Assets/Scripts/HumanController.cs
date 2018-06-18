@@ -14,9 +14,6 @@ public class HumanController : MonoBehaviour {
         foreach (GameObject infection in Infections)
         {
             float distance = Vector3.Distance(transform.position, infection.transform.position);
-
-            Debug.Log("Distance: " + distance);
-
             if (distance < InfectionDistanceRun)
             {
                 Vector3 DirToPlayer = transform.position - infection.transform.position;
@@ -44,16 +41,5 @@ public class HumanController : MonoBehaviour {
     void Update()
     {
         RunAway();
-        /*float distance = Vector3.Distance(transform.position, Infection.transform.position);
-
-        Debug.Log("Distance: " + distance);
-
-        if (distance < InfectionDistanceRun)
-        {
-            Vector3 DirToPlayer = transform.position - Infection.transform.position;
-            Vector3 newPos = transform.position + DirToPlayer;
-            humanAgent.SetDestination(newPos);
-        }*/
-
     }
 }
