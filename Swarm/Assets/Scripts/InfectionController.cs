@@ -5,7 +5,22 @@ using UnityEngine.AI;
 
 public class InfectionController : MonoBehaviour {
 
+    public float health = 1f;
+    float speed = 15f;
     NavMeshAgent infectionAgent;
+
+    void Start ()
+    {
+        infectionAgent = GetComponent<NavMeshAgent>();
+        infectionAgent.autoBraking = false;
+        infectionAgent.speed = speed;
+	}
+
+	void Update ()
+    {
+            infectionAgent.SetDestination(FindClosestHuman());
+	}
+
     private Vector3 FindClosestHuman()
     {
         GameObject[] Humans = GameObject.FindGameObjectsWithTag("Human");
@@ -27,15 +42,4 @@ public class InfectionController : MonoBehaviour {
 
         return bestTarget.position;
     }
-
-    void Start ()
-    {
-        infectionAgent = this.GetComponent<NavMeshAgent>();
-        infectionAgent.autoBraking = false;
-	}
-
-	void Update ()
-    {
-            infectionAgent.SetDestination(FindClosestHuman());
-	}
 }

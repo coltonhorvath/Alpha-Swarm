@@ -5,10 +5,24 @@ using UnityEngine.AI;
 
 public class HumanController : MonoBehaviour {
 
+    int health = 10;
+    float speed = 10f;
     private NavMeshAgent humanAgent;
     public float InfectionDistanceRun = 10.0f;
+    public Rigidbody prefabInfection;
 
-    private void RunAway()
+    void Start()
+    {
+        humanAgent = GetComponent<NavMeshAgent>();
+        humanAgent.speed = speed;
+    }
+
+    void Update()
+    {
+        RunAway();
+    }
+
+    void RunAway()
     {
         GameObject[] Infections = GameObject.FindGameObjectsWithTag("Infection");
         foreach (GameObject infection in Infections)
@@ -23,23 +37,17 @@ public class HumanController : MonoBehaviour {
         }
     }
 
-    public Rigidbody prefabInfection;
     void OnCollisionEnter(Collision colInfo)
     {
         if (colInfo.collider.tag == "Infection")
         {
-            Destroy(gameObject);
-            Instantiate(prefabInfection, transform.position, transform.rotation);
+            Debug.Log("hit");
+            health = health - 1;
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+                Instantiate(prefabInfection, transform.position, transform.rotation);
+            }
         }
-    }
-
-    void Start()
-    {
-        humanAgent = GetComponent<NavMeshAgent>();
-    }
-
-    void Update()
-    {
-        RunAway();
     }
 }
