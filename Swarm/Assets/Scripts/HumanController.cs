@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class HumanController : MonoBehaviour {
 
-    int health = 10;
+    float health = 3;
     float speed = 10f;
-    private NavMeshAgent humanAgent;
     public float InfectionDistanceRun = 10.0f;
+    private NavMeshAgent humanAgent;
     public Rigidbody prefabInfection;
 
     void Start()

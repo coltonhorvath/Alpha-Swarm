@@ -5,9 +5,9 @@ using UnityEngine;
 public class SpawnArea : MonoBehaviour {
 
     public GameObject HumanPrefab;
-    public float NumberOfHumans = 1f;
+    float NumberOfHumans;
     public GameObject InfectionPrefab;
-    public float NumberofInfections;
+    float NumberofInfections;
     public Vector3 center;
     public Vector3 size;
 

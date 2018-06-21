@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class InfectionController : MonoBehaviour {
 
-    public float health = 1f;
+    float health = 5f;
     float speed = 15f;
     NavMeshAgent infectionAgent;
 

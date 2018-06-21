@@ -332,6 +332,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &187386774
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 236.47203
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 328.10782
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -13.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186818557908854, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 712ae7e99b0923148a413a174fb214f5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &197559111
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,10 +556,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HumanPrefab: {fileID: 1622472152696540, guid: eac4a796a0137594b8fee4b11bf34109,
     type: 2}
-  NumberOfHumans: 100
   InfectionPrefab: {fileID: 1365523075233430, guid: b1ad4e0825bb445499cc61443b4a052b,
     type: 2}
-  NumberofInfections: 1
   center: {x: 0, y: 1, z: 0}
   size: {x: 95, y: 1, z: 99}
 --- !u!4 &315527622
