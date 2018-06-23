@@ -7,18 +7,16 @@ public class VaccinatorControlller : MonoBehaviour {
 
     float health = 5f;
     float speed = 12.5f;
-    float chaseDistance = 23f;
     float runDistance = 20f;
+    float chaseDistance = 23f;
     private NavMeshAgent vaccineAgent;
     public Rigidbody infection;
 
-	// Use this for initialization
 	void Start () {
         vaccineAgent = GetComponent<NavMeshAgent>();
         vaccineAgent.speed = speed;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
         Chase();
 	}
@@ -29,16 +27,16 @@ public class VaccinatorControlller : MonoBehaviour {
         foreach (GameObject infection in Infections)
         {
             float distance = Vector3.Distance(transform.position, infection.transform.position);
-            if (distance > chaseDistance)
-            {
-                Vector3 DirToPlayer = transform.position + infection.transform.position;
-                Vector3 newPos = transform.position + DirToPlayer;
-                vaccineAgent.SetDestination(newPos);
-            }
             if (distance < runDistance)
             {
                 Vector3 DirToPlayer = transform.position - infection.transform.position;
                 Vector3 newPos = transform.position + DirToPlayer;
+                vaccineAgent.SetDestination(newPos);
+            }
+            if (distance > chaseDistance)
+            {
+                Vector3 DirToPlayer = transform.position - infection.transform.position;
+                Vector3 newPos = transform.position - DirToPlayer;
                 vaccineAgent.SetDestination(newPos);
             }
         }

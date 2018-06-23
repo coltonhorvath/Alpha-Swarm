@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 public class InfectionController : MonoBehaviour {
 
@@ -24,6 +25,9 @@ public class InfectionController : MonoBehaviour {
     private Vector3 FindClosestHuman()
     {
         GameObject[] Humans = GameObject.FindGameObjectsWithTag("Human");
+        GameObject[] Vaccines = GameObject.FindGameObjectsWithTag("Vaccine");
+        GameObject[] HV = Humans.Concat(Vaccines).ToArray();
+
 
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
