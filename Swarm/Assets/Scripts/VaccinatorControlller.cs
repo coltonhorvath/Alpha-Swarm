@@ -9,7 +9,14 @@ public class VaccinatorControlller : MonoBehaviour {
     float speed = 12.5f;
     float runDistance = 20f;
     float chaseDistance = 23f;
+    float fireRate = 1f;
+    float fireCountdown = 0f;
+    float range = 100f;
+    string infectionTag = "Infection";
     private NavMeshAgent vaccineAgent;
+    public GameObject bulletPrefab;
+    private Transform targetInfection;
+    public Transform firePoint;
     public Rigidbody infection;
 
 	void Start () {
@@ -18,35 +25,60 @@ public class VaccinatorControlller : MonoBehaviour {
 	}
 
 	void Update () {
-        Chase();
+        UpdateTarget();
+        if (fireCountdown <= 0f)
+        {
+            Shoot();
+            fireCountdown = 1f / fireRate;
+        }
+
+        fireCountdown -= Time.deltaTime;
 	}
 
-    void Chase()
+    void UpdateTarget()
     {
-        GameObject[] Infections = GameObject.FindGameObjectsWithTag("Infection");
-        foreach (GameObject infection in Infections)
+        GameObject[] infections = GameObject.FindGameObjectsWithTag(infectionTag);
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestHuman = null;
+        Vector3 currentPosition = this.transform.position;
+
+        foreach (GameObject infection in infections)
         {
-            float distance = Vector3.Distance(transform.position, infection.transform.position);
-            if (distance < runDistance)
+            Vector3 directionToTarget = infection.transform.position - currentPosition;
+
+            float distanceToTarget = directionToTarget.sqrMagnitude;
+            if (distanceToTarget < shortestDistance)
             {
-                Vector3 DirToPlayer = transform.position - infection.transform.position;
-                Vector3 newPos = transform.position + DirToPlayer;
-                vaccineAgent.SetDestination(newPos);
+                shortestDistance = distanceToTarget;
+                nearestHuman = infection;
             }
-            if (distance > chaseDistance)
+            else
             {
-                Vector3 DirToPlayer = transform.position - infection.transform.position;
-                Vector3 newPos = transform.position - DirToPlayer;
-                vaccineAgent.SetDestination(newPos);
+                targetInfection = null;
             }
         }
+
+        if (nearestHuman != null && shortestDistance <= range)
+        {
+            targetInfection = nearestHuman.transform;
+            vaccineAgent.SetDestination(targetInfection.transform.position);
+        }
+    }
+
+    void Shoot()
+    {
+        GameObject BulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Bullet bullet = BulletGO.GetComponent<Bullet>();
+
+        if (bullet != null)
+            bullet.Seek(targetInfection);
     }
 
     void OnCollisionEnter(Collision colInfo)
     {
         if (colInfo.collider.tag == "Infection")
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             health = health - 1;
             if (health <= 0)
             {

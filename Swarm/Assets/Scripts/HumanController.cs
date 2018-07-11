@@ -39,10 +39,20 @@ public class HumanController : MonoBehaviour {
 
     void OnCollisionEnter(Collision colInfo)
     {
+        int MyInt = 0;
+        float timer = 0;   
         if (colInfo.collider.tag == "Infection")
         {
-            Debug.Log("hit");
+            Debug.Log("hit " + colInfo.collider.name);
             health = health - 1;
+
+            timer += Time.deltaTime;
+            if (timer >= 1f)
+            {
+                health -= 1;
+                timer = 0f;
+            }
+
             if (health <= 0)
             {
                 Destroy(gameObject);
