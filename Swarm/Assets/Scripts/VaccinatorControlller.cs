@@ -7,16 +7,18 @@ public class VaccinatorControlller : MonoBehaviour {
 
     float health = 5f;
     float speed = 12.5f;
-    float runDistance = 20f;
-    float chaseDistance = 23f;
+    //float runDistance = 20f;
+    //float chaseDistance = 23f;
+
     float fireRate = 1f;
     float fireCountdown = 0f;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+
     float range = 100f;
     string infectionTag = "Infection";
     private NavMeshAgent vaccineAgent;
-    public GameObject bulletPrefab;
     private Transform targetInfection;
-    public Transform firePoint;
     public Rigidbody infection;
 
 	void Start () {
@@ -59,16 +61,19 @@ public class VaccinatorControlller : MonoBehaviour {
 
         if (nearestInfection != null && shortestDistance <= range)
         {
-            Debug.Log("In range of " + infection.gameObject);
             targetInfection = nearestInfection.transform;
-            vaccineAgent.SetDestination(targetInfection.transform.position);
+            vaccineAgent.SetDestination(targetInfection.position);
+        }
+        else
+        {
+            targetInfection = null;
         }
     }
 
     void Shoot()
     {
-        GameObject BulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Bullet bullet = BulletGO.GetComponent<Bullet>();
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if (bullet != null)
             bullet.Seek(targetInfection);
