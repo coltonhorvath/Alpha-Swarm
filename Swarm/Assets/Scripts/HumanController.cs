@@ -43,7 +43,6 @@ public class HumanController : MonoBehaviour {
         float timer = 0;   
         if (colInfo.collider.tag == "Infection")
         {
-            Debug.Log("hit " + colInfo.collider.name);
             health = health - 1;
 
             timer += Time.deltaTime;

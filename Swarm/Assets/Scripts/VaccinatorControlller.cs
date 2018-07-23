@@ -24,7 +24,8 @@ public class VaccinatorControlller : MonoBehaviour {
         vaccineAgent.speed = speed;
 	}
 
-	void Update () {
+    void Update()
+    {
         UpdateTarget();
         if (fireCountdown <= 0f)
         {
@@ -33,24 +34,22 @@ public class VaccinatorControlller : MonoBehaviour {
         }
 
         fireCountdown -= Time.deltaTime;
-	}
+    }
 
     void UpdateTarget()
     {
         GameObject[] infections = GameObject.FindGameObjectsWithTag(infectionTag);
         float shortestDistance = Mathf.Infinity;
-        GameObject nearestHuman = null;
+        GameObject nearestInfection = null;
         Vector3 currentPosition = this.transform.position;
 
         foreach (GameObject infection in infections)
         {
-            Vector3 directionToTarget = infection.transform.position - currentPosition;
-
-            float distanceToTarget = directionToTarget.sqrMagnitude;
-            if (distanceToTarget < shortestDistance)
+            float directionToInfection = Vector3.Distance(transform.position, infection.transform.position);
+            if (directionToInfection < shortestDistance)
             {
-                shortestDistance = distanceToTarget;
-                nearestHuman = infection;
+                shortestDistance = directionToInfection;
+                nearestInfection = infection;
             }
             else
             {
@@ -58,9 +57,10 @@ public class VaccinatorControlller : MonoBehaviour {
             }
         }
 
-        if (nearestHuman != null && shortestDistance <= range)
+        if (nearestInfection != null && shortestDistance <= range)
         {
-            targetInfection = nearestHuman.transform;
+            Debug.Log("In range of " + infection.gameObject);
+            targetInfection = nearestInfection.transform;
             vaccineAgent.SetDestination(targetInfection.transform.position);
         }
     }
