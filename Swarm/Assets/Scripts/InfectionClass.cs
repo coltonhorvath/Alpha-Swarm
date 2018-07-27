@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfectionClass : MonoBehaviour {
+public class InfectionClass : InfectionController {
 
-    public float health;
-    public float speed;
+    public float health = 3f;
+    string Bullet = "Bullet";
+
+    void Update()
+    {
+        if(health == 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 	
 }

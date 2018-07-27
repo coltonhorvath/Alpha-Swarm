@@ -6,7 +6,7 @@ using System.Linq;
 
 public class InfectionController : MonoBehaviour {
 
-    float health = 5f;
+    public int health = 3;
     float speed = 15f;
     float range = 20000f;
     private Transform targetHuman;
@@ -22,6 +22,11 @@ public class InfectionController : MonoBehaviour {
 
         //InvokeRepeating("UpdateTarget", 0f, 10f);
 	}
+
+    void Update()
+    {
+        UpdateTarget();
+    }
 
     void UpdateTarget()
     {
@@ -53,32 +58,17 @@ public class InfectionController : MonoBehaviour {
         }
     }
 
-	void Update ()
+    public void damageTaken (int damage)
     {
-        UpdateTarget();
-	}
-
-    /*private Vector3 FindClosestHuman()
-    {
-        GameObject[] Humans = GameObject.FindGameObjectsWithTag("Human");
-        GameObject[] Vaccines = GameObject.FindGameObjectsWithTag("Vaccine");
-        GameObject[] HV = Humans.Concat(Vaccines).ToArray();
-
-        float shortestDistance = Mathf.Infinity;
-        Vector3 currentPosition = this.transform.position;
-
-        foreach (GameObject victim in HV)
+        health -= damage;
+        if(health <= 0)
         {
-            Vector3 directionToTarget = victim.transform.position - currentPosition;
-
-            float distanceToTarget = directionToTarget.sqrMagnitude;
-            if (distanceToTarget < shortestDistance)
-            {
-                shortestDistance = distanceToTarget;
-                nearestTarget = victim.transform;
-            }
+            Die();
         }
-
-        return nearestTarget.position;
-    }*/
+    }
+    
+    void Die()
+    {
+        Destroy(gameObject);
+    }
 }

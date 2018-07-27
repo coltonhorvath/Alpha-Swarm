@@ -39,7 +39,6 @@ public class HumanController : MonoBehaviour {
 
     void OnCollisionEnter(Collision colInfo)
     {
-        int MyInt = 0;
         float timer = 0;   
         if (colInfo.collider.tag == "Infection")
         {

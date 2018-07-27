@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour {
     private Transform target;
     public GameObject impactEffect;
     public float speed = 70f;
+    public int damage = 1;
+    private string infection = "Infection";
 
     public void Seek(Transform _target)
     {
@@ -38,5 +40,17 @@ public class Bullet : MonoBehaviour {
         GameObject effectInstance = Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effectInstance, 2f);
         Destroy(gameObject);
+    }
+
+    //https://youtu.be/ZapFCWu0zk0?list=PLPV2KyIb3jR4u5jX8za5iU1cqnQPmbzG0&t=1016
+
+    void Damage (Transform target)
+    {
+        InfectionController e = target.GetComponent<InfectionController>();
+
+        if (e != null)
+        {
+            e.damageTaken(damage);
+        }
     }
 }
