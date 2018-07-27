@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     private Transform target;
+    public GameObject impactEffect;
     public float speed = 70f;
 
     public void Seek(Transform _target)
@@ -34,6 +35,8 @@ public class Bullet : MonoBehaviour {
 
     void HitInfection()
     {
-        Debug.Log("We hit something.");
+        GameObject effectInstance = Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(effectInstance, 2f);
+        Destroy(gameObject);
     }
 }

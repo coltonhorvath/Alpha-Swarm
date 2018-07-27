@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 170076734}
   m_Layer: 0
   m_Name: Directional Light
-  m_TagString: Infection
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1505,7 +1505,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1158243381}
---- !u!1001 &1619722495
+--- !u!1001 &1512470828
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1543,10 +1543,6 @@ Prefab:
     - target: {fileID: 4244680959141820, guid: e522006a9873d094288a73bf8abd6f6f, type: 2}
       propertyPath: m_RootOrder
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1590307171372144, guid: e522006a9873d094288a73bf8abd6f6f, type: 2}
-      propertyPath: m_Name
-      value: Vaccinator
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e522006a9873d094288a73bf8abd6f6f, type: 2}
