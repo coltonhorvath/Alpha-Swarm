@@ -5,17 +5,17 @@ using UnityEngine.AI;
 
 public class VaccinatorControlller : MonoBehaviour {
 
-    float health = 5f;
-    float speed = 12.5f;
+    public float health = 5f;
+    public float speed = 12.5f;
     //float runDistance = 20f;
     //float chaseDistance = 23f;
 
-    float fireRate = 1f;
-    float fireCountdown = 0f;
+    public float fireRate = 1f;
+    public float fireCountdown = 0f;
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-    float range = 100f;
+    public float range = 100f;
     string infectionTag = "Infection";
     private NavMeshAgent vaccineAgent;
     private Transform targetInfection;

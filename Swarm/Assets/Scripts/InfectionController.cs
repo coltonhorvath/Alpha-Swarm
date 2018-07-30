@@ -13,6 +13,7 @@ public class InfectionController : MonoBehaviour {
     NavMeshAgent infectionAgent;
 
     public string humanTag = "Human";
+    public string vaccineTag = "Vaccine";
 
     void Start ()
     {
@@ -31,19 +32,22 @@ public class InfectionController : MonoBehaviour {
     void UpdateTarget()
     {
         GameObject[] Humans = GameObject.FindGameObjectsWithTag(humanTag);
+        GameObject[] Vaccines = GameObject.FindGameObjectsWithTag(vaccineTag);
+        GameObject[] HV = Humans.Concat(Vaccines).ToArray();
+
         float shortestDistance = Mathf.Infinity;
         GameObject nearestHuman = null;
         Vector3 currentPosition = this.transform.position;
 
-        foreach (GameObject human in Humans)
+        foreach (GameObject huvacs in HV)
         {
-            Vector3 directionToTarget = human.transform.position - currentPosition;
+            Vector3 directionToTarget = huvacs.transform.position - currentPosition;
 
             float distanceToTarget = directionToTarget.sqrMagnitude;
             if (distanceToTarget < shortestDistance)
             {
                 shortestDistance = distanceToTarget;
-                nearestHuman = human;
+                nearestHuman = huvacs;
             }
             else
             {

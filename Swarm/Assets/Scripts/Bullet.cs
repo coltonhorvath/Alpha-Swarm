@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour {
             HitInfection();
             return;
         }
-
+  
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
 	}
 
@@ -39,10 +39,10 @@ public class Bullet : MonoBehaviour {
     {
         GameObject effectInstance = Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effectInstance, 2f);
+
+        Damage(target);
         Destroy(gameObject);
     }
-
-    //https://youtu.be/ZapFCWu0zk0?list=PLPV2KyIb3jR4u5jX8za5iU1cqnQPmbzG0&t=1016
 
     void Damage (Transform target)
     {

@@ -7,7 +7,7 @@ TagManager:
   - Vaccine
   - Infection
   - Human
-  - Agent
+  - Bullet
   layers:
   - Default
   - TransparentFX
