@@ -63,17 +63,7 @@ public class InfectionController : MonoBehaviour {
         if (nearestHuman != null && shortestDistance <= range)
         {
             targetHuman = nearestHuman.transform;
-            if (this.GetComponent<BloaterClass>())
-            {
-                Debug.Log("Bloater was accessed by " + this.gameObject.name + bloaterAgent.speed);
-                bloaterAgent.SetDestination(targetHuman.transform.position);
-            }
-            if (this.GetComponent<InfectedClass>())
-            {
-                Debug.Log("Infected was accessed by" + this.gameObject.name + infectionAgent.speed);
-                infectionAgent.SetDestination(targetHuman.transform.position);
-            }
-            //infectionAgent.SetDestination(targetHuman.transform.position);
+            infectionAgent.SetDestination(targetHuman.transform.position);
         }
     }
 }
