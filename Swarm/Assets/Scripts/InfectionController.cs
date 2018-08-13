@@ -8,10 +8,12 @@ public class InfectionController : MonoBehaviour {
 
     
     float speed = 15f;
+    float bloaterSpeed = 5f;
     float range = 20000f;
     float spawnChance = 50;
     private Transform targetHuman;
     NavMeshAgent infectionAgent;
+    NavMeshAgent bloaterAgent;
 
     private string humanTag = "Human";
     private string vaccineTag = "Vaccine";
@@ -19,8 +21,10 @@ public class InfectionController : MonoBehaviour {
     void Start ()
     {
         infectionAgent = GetComponent<NavMeshAgent>();
+        bloaterAgent = GetComponent<NavMeshAgent>();
         infectionAgent.autoBraking = false;
         infectionAgent.speed = speed;
+        bloaterAgent.speed = bloaterSpeed;
 
         //InvokeRepeating("UpdateTarget", 0f, 10f);
 	}
@@ -59,21 +63,17 @@ public class InfectionController : MonoBehaviour {
         if (nearestHuman != null && shortestDistance <= range)
         {
             targetHuman = nearestHuman.transform;
-            infectionAgent.SetDestination(targetHuman.transform.position);
+            if (this.GetComponent<BloaterClass>())
+            {
+                Debug.Log("Bloater was accessed by " + this.gameObject.name + bloaterAgent.speed);
+                bloaterAgent.SetDestination(targetHuman.transform.position);
+            }
+            if (this.GetComponent<InfectedClass>())
+            {
+                Debug.Log("Infected was accessed by" + this.gameObject.name + infectionAgent.speed);
+                infectionAgent.SetDestination(targetHuman.transform.position);
+            }
+            //infectionAgent.SetDestination(targetHuman.transform.position);
         }
     }
-
-    /*public void damageTaken (int damage)
-    {
-        health -= damage;
-        if(health <= 0)
-        {
-            Die();
-        }
-    }
-    
-    void Die()
-    {
-        Destroy(gameObject);
-    }*/
 }
