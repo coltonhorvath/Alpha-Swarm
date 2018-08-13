@@ -46,11 +46,17 @@ public class Bullet : MonoBehaviour {
 
     void Damage (Transform target)
     {
-        InfectionController e = target.GetComponent<InfectionController>();
+        InfectedClass infection = target.GetComponent<InfectedClass>();
 
-        if (e != null)
+        if (infection != null)
         {
-            e.damageTaken(damage);
+            infection.damageTaken(damage);
+        }
+
+        BloaterClass bloater = target.GetComponent<BloaterClass>();
+        if (bloater != null)
+        {
+            bloater.damageTaken(damage);
         }
     }
 }
