@@ -58,5 +58,11 @@ public class Bullet : MonoBehaviour {
         {
             bloater.damageTaken(damage);
         }
+
+        /*InfectionController e = target.GetComponent<InfectionController>();
+        if (e != null)
+        {
+            e.damageTaken(damage);
+        }*/
     }
 }
