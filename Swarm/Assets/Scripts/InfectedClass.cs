@@ -6,12 +6,12 @@ using System.Linq;
 
 public class InfectedClass : MonoBehaviour {
  	public int health = 3;
-    float speed = 15f;
+    public float speed = 15f;
     float range = 20000f;
     float spawnChance = 50;
     private Transform targetHuman;
     NavMeshAgent infectedAgent;
-     public string humanTag = "Human";
+    public string humanTag = "Human";
     public string vaccineTag = "Vaccine";
 
      void Start ()
@@ -62,7 +62,6 @@ public class InfectedClass : MonoBehaviour {
     }
     public void damageTaken (int damage)
     {
-        Debug.Log(this.gameObject.name + "" + health);
         health -= damage;
         if(health <= 0)
          {

@@ -6,24 +6,26 @@ using System.Linq;
 
 public class BloaterClass : MonoBehaviour {
  	public int health = 5;
-    float speed = 15f;
+    public float speed = 3f;
     float range = 20000f;
     float spawnChance = 50;
     private Transform targetHuman;
+    public GameObject Pod;
     NavMeshAgent bloaterAgent;
-     public string humanTag = "Human";
+    public string humanTag = "Human";
     public string vaccineTag = "Vaccine";
+    public string podSpawnTag = "PodSpawn";
 
-     void Start ()
+    protected void Start ()
     {
          bloaterAgent = GetComponent<NavMeshAgent>();
          bloaterAgent.autoBraking = false;
          bloaterAgent.speed = speed;
- 
+         this.gameObject.tag = "Infection";
          //InvokeRepeating("UpdateTarget", 0f, 10f);
  	}
  
-     void Update()
+     protected void Update()
      {
          UpdateTarget();
      }
@@ -62,7 +64,6 @@ public class BloaterClass : MonoBehaviour {
     }
     public void damageTaken (int damage)
     {
-        Debug.Log(this.gameObject.name + "" + health);
         health -= damage;
         if(health <= 0)
          {
@@ -73,5 +74,10 @@ public class BloaterClass : MonoBehaviour {
     void Die()
     {
         Destroy(gameObject);
+        GameObject[] podSpawnArray = GameObject.FindGameObjectsWithTag(podSpawnTag);
+        foreach (GameObject podSpawnPoints in podSpawnArray)
+        {
+            GameObject podInstance = Instantiate(Pod, transform.position, transform.rotation);
+        }
     }
  }

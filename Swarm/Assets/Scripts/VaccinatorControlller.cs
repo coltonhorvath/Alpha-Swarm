@@ -83,8 +83,8 @@ public class VaccinatorControlller : MonoBehaviour {
     {
         if (colInfo.collider.tag == "Infection")
         {
-            //Debug.Log("hit");
             health = health - 1;
+            Debug.Log(health);
             if (health <= 0)
             {
                 Destroy(gameObject);

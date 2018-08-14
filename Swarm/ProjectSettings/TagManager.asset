@@ -8,6 +8,8 @@ TagManager:
   - Infection
   - Human
   - Bullet
+  - PodSpawn
+  - Fire
   layers:
   - Default
   - TransparentFX
