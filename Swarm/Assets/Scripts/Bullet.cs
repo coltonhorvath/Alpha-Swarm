@@ -59,6 +59,12 @@ public class Bullet : MonoBehaviour {
             bloater.damageTaken(damage);
         }
 
+        ChargerClass charger = target.GetComponent<ChargerClass>();
+        if (charger != null)
+        {
+            charger.damageTaken(damage);
+        }
+
         /*InfectionController e = target.GetComponent<InfectionController>();
         if (e != null)
         {

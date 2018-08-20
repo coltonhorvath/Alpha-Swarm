@@ -6,7 +6,7 @@ using System.Linq;
 
 public class BloaterClass : MonoBehaviour {
  	public int health = 5;
-    public float speed = 3f;
+    public float speed = 10f;
     float range = 20000f;
     float spawnChance = 50;
     private Transform targetHuman;

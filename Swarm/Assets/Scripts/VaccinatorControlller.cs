@@ -7,15 +7,11 @@ public class VaccinatorControlller : MonoBehaviour {
 
     public float health = 5f;
     public float speed = 12.5f;
-    //float runDistance = 20f;
-    //float chaseDistance = 23f;
-
     public float fireRate = 1f;
     public float fireCountdown = 0f;
+    public float range;
     public GameObject bulletPrefab;
     public Transform firePoint;
-
-    public float range = 100f;
     string infectionTag = "Infection";
     private NavMeshAgent vaccineAgent;
     private Transform targetInfection;
@@ -26,7 +22,12 @@ public class VaccinatorControlller : MonoBehaviour {
         vaccineAgent.speed = speed;
 	}
 
-    void Update()
+    void OnDrawGizmosSelected() {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    void FixedUpdate()
     {
         UpdateTarget();
         if (fireCountdown <= 0f)
@@ -34,7 +35,6 @@ public class VaccinatorControlller : MonoBehaviour {
             Shoot();
             fireCountdown = 1f / fireRate;
         }
-
         fireCountdown -= Time.deltaTime;
     }
 
@@ -44,13 +44,15 @@ public class VaccinatorControlller : MonoBehaviour {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestInfection = null;
         Vector3 currentPosition = this.transform.position;
+        //targetOffset = new Vector3(10,0,10);
 
         foreach (GameObject infection in infections)
         {
-            float directionToInfection = Vector3.Distance(transform.position, infection.transform.position);
-            if (directionToInfection < shortestDistance)
+            Vector3 directionToInfection = infection.transform.position - currentPosition;
+            float distanceToTarget = directionToInfection.sqrMagnitude;
+            if (distanceToTarget < shortestDistance)
             {
-                shortestDistance = directionToInfection;
+                shortestDistance = distanceToTarget;
                 nearestInfection = infection;
             }
             else
@@ -61,8 +63,9 @@ public class VaccinatorControlller : MonoBehaviour {
 
         if (nearestInfection != null && shortestDistance <= range)
         {
+            //Vector3 offset = new Vector3()
             targetInfection = nearestInfection.transform;
-            vaccineAgent.SetDestination(targetInfection.position);
+            vaccineAgent.destination = targetInfection.transform.position;
         }
         else
         {
@@ -84,7 +87,6 @@ public class VaccinatorControlller : MonoBehaviour {
         if (colInfo.collider.tag == "Infection")
         {
             health = health - 1;
-            Debug.Log(health);
             if (health <= 0)
             {
                 Destroy(gameObject);
