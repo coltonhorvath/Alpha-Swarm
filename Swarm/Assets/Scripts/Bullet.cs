@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour {
     public GameObject impactEffect;
     public float speed = 70f;
     public int damage = 1;
-    private string infection = "Infection";
 
     public void Seek(Transform _target)
     {
@@ -39,7 +38,6 @@ public class Bullet : MonoBehaviour {
     {
         GameObject effectInstance = Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effectInstance, 2f);
-
         Damage(target);
         Destroy(gameObject);
     }

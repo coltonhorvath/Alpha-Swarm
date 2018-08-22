@@ -15,7 +15,7 @@ public class PodClass : BloaterClass {
 		self = GetComponent<Rigidbody>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
 	}
-	void OnCollisionStay(Collider colinfo)
+	void OnCollisionStay(Collision colinfo)
 	{
 		Debug.Log(colinfo.gameObject.name);
 		if (colinfo.gameObject.name == "Ground")

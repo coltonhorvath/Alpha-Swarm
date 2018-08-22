@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   speed: 15
-  range: 20000
+  range: 30
   chargeRange: 25
   chargeForce: 7000
   chargeTimer: 2.5

@@ -12,17 +12,18 @@ public class VaccinatorControlller : MonoBehaviour {
     public float range;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    string infectionTag = "Infection";
-    private NavMeshAgent vaccineAgent;
     private Transform targetInfection;
+    private NavMeshAgent vaccineAgent;
     public Rigidbody infection;
+    string infectionTag = "Infection";
 
 	void Start () {
         vaccineAgent = GetComponent<NavMeshAgent>();
         vaccineAgent.speed = speed;
 	}
 
-    void OnDrawGizmosSelected() {
+    void OnDrawGizmosSelected() 
+    {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, range);
     }
@@ -48,8 +49,8 @@ public class VaccinatorControlller : MonoBehaviour {
 
         foreach (GameObject infection in infections)
         {
-            Vector3 directionToInfection = infection.transform.position - currentPosition;
-            float distanceToTarget = directionToInfection.sqrMagnitude;
+            //Vector3 directionToInfection = infection.transform.position - currentPosition;
+            float distanceToTarget = Vector3.Distance(transform.position, infection.transform.position);
             if (distanceToTarget < shortestDistance)
             {
                 shortestDistance = distanceToTarget;

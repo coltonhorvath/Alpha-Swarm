@@ -195,7 +195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1178542267037982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.54, y: 1.25, z: -1.030304}
+  m_LocalPosition: {x: -9.791048, y: 1.3, z: 3.3709793}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4716115390168254}
@@ -290,10 +290,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   speed: 10
+  range: 30
+  spawnChance: 50
   Pod: {fileID: 1092720894611338, guid: 223750b35eb9b1440a130a79a6a6ef7f, type: 2}
-  humanTag: Human
-  vaccineTag: Vaccine
-  podSpawnTag: PodSpawn
 --- !u!114 &114933957577814482
 MonoBehaviour:
   m_ObjectHideFlags: 1

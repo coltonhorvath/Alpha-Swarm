@@ -5,13 +5,13 @@ using UnityEngine.AI;
 using System.Linq;
 
 public class ChargerClass : MonoBehaviour {
- 	public int health = 10;
-    public float speed = 15f;
-    public float range = 20000f;
-	public float chargeRange = 25f;
+ 	public int health;
+    public float speed;
+    public float range;
+	public float chargeRange;
 	public int chargeForce;
-	public float chargeTimer = 2.5f;
-	public float chargeRecharge = 10f;
+	public float chargeTimer;
+	public float chargeRecharge;
 	bool chargeReady = true;
     float spawnChance = 50;
     private Transform targetHuman;
@@ -30,6 +30,12 @@ public class ChargerClass : MonoBehaviour {
  
         InvokeRepeating("Test", 0f, 1f);
  	}
+    void OnDrawGizmosSelected() 
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
+     
     void FixedUpdate()
     {
         UpdateTarget();
@@ -54,9 +60,8 @@ public class ChargerClass : MonoBehaviour {
  
         foreach (GameObject huvacs in HV)
         {
-            Vector3 directionToTarget = huvacs.transform.position - currentPosition;
- 
-            float distanceToTarget = directionToTarget.sqrMagnitude;
+            //Vector3 directionToTarget = huvacs.transform.position - currentPosition;
+            float distanceToTarget = Vector3.Distance(transform.position, huvacs.transform.position);
             if (distanceToTarget < shortestDistance)
             {
                 shortestDistance = distanceToTarget;
