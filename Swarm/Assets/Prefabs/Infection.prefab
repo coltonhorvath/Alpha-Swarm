@@ -116,6 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   speed: 15
+  range: 30
+  spawnChance: 50
   humanTag: Human
   vaccineTag: Vaccine
 --- !u!114 &114860397422842568

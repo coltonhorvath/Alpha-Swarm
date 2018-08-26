@@ -5,10 +5,10 @@ using UnityEngine.AI;
 using System.Linq;
 
 public class InfectedClass : MonoBehaviour {
- 	public int health = 3;
-    public float speed = 15f;
-    float range = 20000f;
-    float spawnChance = 50;
+ 	public int health;
+    public float speed;
+    public float range;
+    public float spawnChance;
     private Transform targetHuman;
     NavMeshAgent infectedAgent;
     public string humanTag = "Human";
@@ -19,9 +19,13 @@ public class InfectedClass : MonoBehaviour {
         infectedAgent = GetComponent<NavMeshAgent>();
         infectedAgent.autoBraking = false;
         infectedAgent.speed = speed;
- 
-        //InvokeRepeating("UpdateTarget", 0f, 10f);
  	}
+
+    void OnDrawGizmosSelected() 
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
  
     void Update()
     {
@@ -61,6 +65,7 @@ public class InfectedClass : MonoBehaviour {
     }
     public void damageTaken (int damage)
     {
+        Debug.Log(health);
         health -= damage;
         if(health <= 0)
         {
