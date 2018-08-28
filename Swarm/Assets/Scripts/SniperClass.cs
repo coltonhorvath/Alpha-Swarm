@@ -10,6 +10,7 @@ public class SniperClass : MonoBehaviour {
     public float fireTimer;
     public float fireRatePerSecond;
     public float range;
+    public float tooClose;
     public GameObject bulletPrefab;
     public Transform firePoint;
 	public Transform partToRotate;
@@ -27,6 +28,8 @@ public class SniperClass : MonoBehaviour {
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, tooClose);
     }
 
     void FixedUpdate()
@@ -66,8 +69,14 @@ public class SniperClass : MonoBehaviour {
                 targetInfection = null;
             }
         }
-
-        if (nearestInfection != null && shortestDistance <= range)
+        if(nearestInfection != null && shortestDistance <= tooClose)
+        {
+            targetInfection = nearestInfection.transform;
+            Vector3 dirToInfection = transform.position - targetInfection.transform.position;
+            Vector3 runAway = transform.position + dirToInfection;
+            vaccineAgent.SetDestination(runAway);
+        }
+        else if (nearestInfection != null && shortestDistance <= range)
         {
             targetInfection = nearestInfection.transform;
             vaccineAgent.destination = targetInfection.transform.position;
