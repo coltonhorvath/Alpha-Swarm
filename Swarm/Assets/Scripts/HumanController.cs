@@ -7,6 +7,7 @@ public class HumanController : MonoBehaviour {
 
     float health = 3;
     float speed = 10f;
+    float timer;
     public float InfectionDistanceRun = 10.0f;
     private NavMeshAgent humanAgent;
     public Rigidbody prefabInfection;
@@ -37,25 +38,27 @@ public class HumanController : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collision colInfo)
+    void OnCollisionStay(Collision stayInfo)
     {
-        float timer = 0;   
-        if (colInfo.collider.tag == "Infection")
+        if(stayInfo.collider.tag == "Infection") SufferInfection();
+    }
+    
+    void SufferInfection()
+    {
+        timer += Time.deltaTime;
+        if (timer >= 1f)
         {
-            health = health - 1;
-
-            timer += Time.deltaTime;
-            if (timer >= 1f)
-            {
-                health -= 1;
-                timer = 0f;
-            }
-
-            if (health <= 0)
+            health -= 1f;
+            timer = 0;
+        }
+        if (health <= 0) Die();
+    }
+    void Die()
+    {
+        if (health <= 0)
             {
                 Destroy(gameObject);
                 Instantiate(prefabInfection, transform.position, transform.rotation);
             }
-        }
     }
 }

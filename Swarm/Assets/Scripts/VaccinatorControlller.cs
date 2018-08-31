@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class VaccinatorControlller : MonoBehaviour {
 
     public float health = 5f;
+    public float timer;
     public float speed = 12.5f;
     public float fireRate = 1f;
     public float fireCountdown = 0f;
@@ -83,16 +84,28 @@ public class VaccinatorControlller : MonoBehaviour {
             bullet.Seek(targetInfection);
     }
 
-    void OnCollisionEnter(Collision colInfo)
+    void OnCollisionStay(Collision stayInfo)
     {
-        if (colInfo.collider.tag == "Infection")
+        if(stayInfo.collider.tag == "Infection") SufferInfection();
+    }
+    
+    void SufferInfection()
+    {
+        timer += Time.deltaTime;
+        if (timer >= 1f)
         {
-            health = health - 1;
-            if (health <= 0)
+            health -= 1f;
+            timer = 0;
+        }
+        if (health <= 0) Die();
+    }
+
+    void Die()
+    {
+        if (health <= 0)
             {
                 Destroy(gameObject);
                 Instantiate(infection, transform.position, transform.rotation);
             }
-        }
     }
 }

@@ -8,12 +8,12 @@ public class ChargerClass : MonoBehaviour {
  	public int health;
     public float speed;
     public float range;
+    public float spawnChance;
 	public float chargeRange;
 	public int chargeForce;
 	public float chargeTimer;
 	public float chargeRecharge;
 	bool chargeReady = true;
-    float spawnChance = 50;
     private Transform targetHuman;
     NavMeshAgent ChargerAgent;
 	Rigidbody chargerRigidBody;

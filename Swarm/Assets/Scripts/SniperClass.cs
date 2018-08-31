@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class SniperClass : MonoBehaviour {
 
     public float health = 5f;
-    public float timer;
+    public float healthTimer;
     public float speed = 12.5f;
-    public float fireTimer;
+    private float fireTimer;
     public float fireRatePerSecond;
     public float range;
     public float tooClose;
@@ -100,41 +100,20 @@ public class SniperClass : MonoBehaviour {
             bullet.Seek(targetInfection);
     }
 
-    void OnTriggerEnter(Collider colInfo)
+    void OnCollisionStay(Collision stayInfo)
     {
-        // if (colInfo.gameObject.tag == "Infection")
-        // {
-        //     Debug.Log("IF STATEMENT");
-        //     health = health - 1;
-        //     Die();
-        // }
+        if(stayInfo.collider.tag == "Infection") SufferInfection();
     }
-
-    void OnTriggerStay(Collider other)
-    {
-        // Every frame overlapping infected
-        SufferInfection();
-    }
-    
     
     void SufferInfection()
     {
-        timer += Time.deltaTime;
-    
-        // On timer full, cause damage
-        if (timer >= 1f)
+        healthTimer += Time.deltaTime;
+        if (healthTimer >= 1f)
         {
             health -= 1f;
-            timer = 0;
+            healthTimer = 0;
         }
-        
-        // When
         if (health <= 0) Die();
-    }
-
-    void OncollisionExit(Collision exitInfo)
-    {
-
     }
 
     void Die()
