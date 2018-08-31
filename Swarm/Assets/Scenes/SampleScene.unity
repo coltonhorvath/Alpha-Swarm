@@ -878,12 +878,27 @@ Prefab:
     - target: {fileID: 195996934716108518, guid: b1ad4e0825bb445499cc61443b4a052b,
         type: 2}
       propertyPath: m_Acceleration
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 195996934716108518, guid: b1ad4e0825bb445499cc61443b4a052b,
         type: 2}
       propertyPath: m_AngularSpeed
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 195996934716108518, guid: b1ad4e0825bb445499cc61443b4a052b,
+        type: 2}
+      propertyPath: m_Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114653133858623228, guid: b1ad4e0825bb445499cc61443b4a052b,
+        type: 2}
+      propertyPath: speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 135784373352990106, guid: b1ad4e0825bb445499cc61443b4a052b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1ad4e0825bb445499cc61443b4a052b, type: 2}
@@ -2430,23 +2445,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114339968926734410, guid: a18662b1de85b4b46983080b9f3e085f,
         type: 2}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114339968926734410, guid: a18662b1de85b4b46983080b9f3e085f,
-        type: 2}
       propertyPath: tooClose
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 195418988643569774, guid: a18662b1de85b4b46983080b9f3e085f,
+    - target: {fileID: 114339968926734410, guid: a18662b1de85b4b46983080b9f3e085f,
         type: 2}
-      propertyPath: m_Acceleration
-      value: 35
+      propertyPath: health
+      value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 195418988643569774, guid: a18662b1de85b4b46983080b9f3e085f,
+    - target: {fileID: 114339968926734410, guid: a18662b1de85b4b46983080b9f3e085f,
         type: 2}
-      propertyPath: m_AngularSpeed
-      value: 120
+      propertyPath: speed
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18662b1de85b4b46983080b9f3e085f, type: 2}

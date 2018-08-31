@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class SniperClass : MonoBehaviour {
 
     public float health = 5f;
+    public float timer;
     public float speed = 12.5f;
     public float fireTimer;
     public float fireRatePerSecond;
@@ -69,14 +70,14 @@ public class SniperClass : MonoBehaviour {
                 targetInfection = null;
             }
         }
-        if(nearestInfection != null && shortestDistance <= tooClose)
-        {
-            targetInfection = nearestInfection.transform;
-            Vector3 dirToInfection = transform.position - targetInfection.transform.position;
-            Vector3 runAway = transform.position + dirToInfection;
-            vaccineAgent.SetDestination(runAway);
-        }
-        else if (nearestInfection != null && shortestDistance <= range)
+        // if(nearestInfection != null && shortestDistance <= tooClose)
+        // {
+        //     targetInfection = nearestInfection.transform;
+        //     Vector3 dirToInfection = transform.position - targetInfection.transform.position;
+        //     Vector3 runAway = transform.position + dirToInfection;
+        //     vaccineAgent.SetDestination(runAway);
+        // }
+        if (nearestInfection != null && shortestDistance <= range)
         {
             targetInfection = nearestInfection.transform;
             vaccineAgent.destination = targetInfection.transform.position;
@@ -99,16 +100,49 @@ public class SniperClass : MonoBehaviour {
             bullet.Seek(targetInfection);
     }
 
-    void OnCollisionEnter(Collision colInfo)
+    void OnTriggerEnter(Collider colInfo)
     {
-        if (colInfo.collider.tag == "Infection")
+        // if (colInfo.gameObject.tag == "Infection")
+        // {
+        //     Debug.Log("IF STATEMENT");
+        //     health = health - 1;
+        //     Die();
+        // }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        // Every frame overlapping infected
+        SufferInfection();
+    }
+    
+    
+    void SufferInfection()
+    {
+        timer += Time.deltaTime;
+    
+        // On timer full, cause damage
+        if (timer >= 1f)
         {
-            health = health - 1;
-            if (health <= 0)
+            health -= 1f;
+            timer = 0;
+        }
+        
+        // When
+        if (health <= 0) Die();
+    }
+
+    void OncollisionExit(Collision exitInfo)
+    {
+
+    }
+
+    void Die()
+    {
+        if (health <= 0)
             {
                 Destroy(gameObject);
                 Instantiate(infection, transform.position, transform.rotation);
             }
-        }
     }
 }
