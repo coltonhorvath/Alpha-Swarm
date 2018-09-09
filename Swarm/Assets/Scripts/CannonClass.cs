@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class CannonClass : MonoBehaviour {
 
-	public int ammo;
-	public float timer;
-	public int reloadTimer;
+	// public int ammo;
+	// public float timer;
+	// public int reloadTimer;
+	private float fireTimer;
+    public float fireRatePerSecond;
 	public float closeRange;
 	public float farRange;
+	public float mortarForce;
 	private string infectionTag = "Infection";
 	public GameObject shellPrefab;
 	private Transform targetInfection;
@@ -29,7 +32,14 @@ public class CannonClass : MonoBehaviour {
 	void FixedUpdate () 
 	{
 		UpdateTarget();
-		Shoot();
+		fireTimer -= Time.deltaTime;
+		Debug.Log(fireTimer);
+		if (fireTimer <= 0f)
+        {
+            Shoot();
+			Debug.Log("shooting now");
+            fireTimer = fireRatePerSecond;
+        }
 	}
 
 	void UpdateTarget()
@@ -55,7 +65,7 @@ public class CannonClass : MonoBehaviour {
 
         if(nearestInfection != null && shortestDistance >= closeRange && shortestDistance <= farRange)
         {
-			Debug.Log("infection found");
+			//Debug.Log("infection found");
             targetInfection = nearestInfection.transform;
 			Vector3 directionToRotate = targetInfection.position - transform.position;
 			Quaternion lookRotation = Quaternion.LookRotation(directionToRotate);
@@ -69,21 +79,18 @@ public class CannonClass : MonoBehaviour {
         }
 	}
 
-	void Shoot()
+	public void Shoot()
 	{
 		GameObject shellGO = (GameObject)Instantiate(shellPrefab, firePoint.position, shellPrefab.transform.rotation);
 		Bullet shell = shellGO.GetComponent<Bullet>();
-		Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 6f);
+		shellGO.GetComponent<Rigidbody>().AddRelativeForce(0,0, mortarForce, ForceMode.Impulse);
+		Debug.Log("Instantiat");
+		
+		// Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 6f);
 
-		foreach (Collider target in hitColliders)
-		{
-			//Needs workd done here.
-		}
-
-		timer += Time.deltaTime;
-		if (timer >= 10f)
-		{
-			
-		}
+		// foreach (Collider target in hitColliders)
+		// {
+		// 	//Needs workd done here.
+		// }
 	}
 }

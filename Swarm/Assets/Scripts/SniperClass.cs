@@ -20,11 +20,6 @@ public class SniperClass : MonoBehaviour {
     private Rigidbody infection;
     string infectionTag = "Infection";
 
-	void Start () {
-        vaccineAgent = GetComponent<NavMeshAgent>();
-        vaccineAgent.speed = speed;
-	}
-
     void OnDrawGizmosSelected() 
     {
         Gizmos.color = Color.white;
@@ -32,6 +27,11 @@ public class SniperClass : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, tooClose);
     }
+
+	void Start () {
+        vaccineAgent = GetComponent<NavMeshAgent>();
+        vaccineAgent.speed = speed;
+	}
 
     void FixedUpdate()
     {
